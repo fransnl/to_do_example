@@ -12,6 +12,17 @@ const add = document.getElementById('add');
 const restore = document.getElementById('restore');
 const todoList = document.getElementById('todo-list');
 const doneList = document.getElementById('done-list');
+const addInput = document.getElementById('add-input');
+
+//i ändring av text input, aktiverar/avaktiverar 'Lägg till' knappen
+addInput.addEventListener('change', () => {
+    if(addInput.value !== ''){
+        add.disabled = false;
+    } else {
+        add.disabled = true;
+    }
+});
+
 
 /*
 lägger till en eventlistener som triggar en funktion när 
@@ -65,6 +76,21 @@ add.addEventListener('click', () => {
     listItem.appendChild(delet);
     //lägger till list punkten i listan 'Att göra'
     todoList.appendChild(listItem);
+});
+
+//tar bort värdet i text input samt alla list punkter
+restore.addEventListener('click', () => {
+    addInput.value = '';
+    const todoItems = todoList.querySelectorAll('li');
+    const doneItems = doneList.querySelectorAll('li');
+
+    for(const item of todoItems){
+        item.remove();
+    }
+
+    for(const item of doneItems){
+        item.remove();
+    }
 });
 
 
